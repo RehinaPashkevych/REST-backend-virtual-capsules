@@ -1,0 +1,11 @@
+C:\Users\РЕГИНА\Desktop\studia\RUST\hello-rust\target\debug\deps\libgetrandom-01d91b0686a171dc.rmeta: C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\getrandom-0.2.12\src\lib.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\getrandom-0.2.12\src\error.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\getrandom-0.2.12\src\util.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\getrandom-0.2.12\src\error_impls.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\getrandom-0.2.12\src\windows.rs
+
+C:\Users\РЕГИНА\Desktop\studia\RUST\hello-rust\target\debug\deps\libgetrandom-01d91b0686a171dc.rlib: C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\getrandom-0.2.12\src\lib.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\getrandom-0.2.12\src\error.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\getrandom-0.2.12\src\util.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\getrandom-0.2.12\src\error_impls.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\getrandom-0.2.12\src\windows.rs
+
+C:\Users\РЕГИНА\Desktop\studia\RUST\hello-rust\target\debug\deps\getrandom-01d91b0686a171dc.d: C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\getrandom-0.2.12\src\lib.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\getrandom-0.2.12\src\error.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\getrandom-0.2.12\src\util.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\getrandom-0.2.12\src\error_impls.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\getrandom-0.2.12\src\windows.rs
+
+C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\getrandom-0.2.12\src\lib.rs:
+C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\getrandom-0.2.12\src\error.rs:
+C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\getrandom-0.2.12\src\util.rs:
+C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\getrandom-0.2.12\src\error_impls.rs:
+C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\getrandom-0.2.12\src\windows.rs:

@@ -1,0 +1,11 @@
+C:\Users\РЕГИНА\Desktop\studia\RUST\hello-rust\target\debug\deps\libtextwrap-ac23c5b681830f89.rmeta: C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\textwrap-0.13.4\src\lib.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\textwrap-0.13.4\src\indentation.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\textwrap-0.13.4\src\splitting.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\textwrap-0.13.4\src\core.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\textwrap-0.13.4\src\core\optimal_fit.rs
+
+C:\Users\РЕГИНА\Desktop\studia\RUST\hello-rust\target\debug\deps\libtextwrap-ac23c5b681830f89.rlib: C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\textwrap-0.13.4\src\lib.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\textwrap-0.13.4\src\indentation.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\textwrap-0.13.4\src\splitting.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\textwrap-0.13.4\src\core.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\textwrap-0.13.4\src\core\optimal_fit.rs
+
+C:\Users\РЕГИНА\Desktop\studia\RUST\hello-rust\target\debug\deps\textwrap-ac23c5b681830f89.d: C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\textwrap-0.13.4\src\lib.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\textwrap-0.13.4\src\indentation.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\textwrap-0.13.4\src\splitting.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\textwrap-0.13.4\src\core.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\textwrap-0.13.4\src\core\optimal_fit.rs
+
+C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\textwrap-0.13.4\src\lib.rs:
+C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\textwrap-0.13.4\src\indentation.rs:
+C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\textwrap-0.13.4\src\splitting.rs:
+C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\textwrap-0.13.4\src\core.rs:
+C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\textwrap-0.13.4\src\core\optimal_fit.rs:

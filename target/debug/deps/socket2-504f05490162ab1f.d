@@ -1,0 +1,11 @@
+C:\Users\РЕГИНА\Desktop\studia\RUST\hello-rust\target\debug\deps\libsocket2-504f05490162ab1f.rmeta: C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\socket2-0.5.6\src\lib.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\socket2-0.5.6\src\sockaddr.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\socket2-0.5.6\src\socket.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\socket2-0.5.6\src\sockref.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\socket2-0.5.6\src\sys\windows.rs
+
+C:\Users\РЕГИНА\Desktop\studia\RUST\hello-rust\target\debug\deps\libsocket2-504f05490162ab1f.rlib: C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\socket2-0.5.6\src\lib.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\socket2-0.5.6\src\sockaddr.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\socket2-0.5.6\src\socket.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\socket2-0.5.6\src\sockref.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\socket2-0.5.6\src\sys\windows.rs
+
+C:\Users\РЕГИНА\Desktop\studia\RUST\hello-rust\target\debug\deps\socket2-504f05490162ab1f.d: C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\socket2-0.5.6\src\lib.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\socket2-0.5.6\src\sockaddr.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\socket2-0.5.6\src\socket.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\socket2-0.5.6\src\sockref.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\socket2-0.5.6\src\sys\windows.rs
+
+C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\socket2-0.5.6\src\lib.rs:
+C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\socket2-0.5.6\src\sockaddr.rs:
+C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\socket2-0.5.6\src\socket.rs:
+C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\socket2-0.5.6\src\sockref.rs:
+C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\socket2-0.5.6\src\sys\windows.rs:

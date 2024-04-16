@@ -1,0 +1,11 @@
+C:\Users\РЕГИНА\Desktop\studia\RUST\hello-rust\target\debug\deps\libubyte-20fd8d7c05489b0e.rmeta: C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\ubyte-0.10.4\src\lib.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\ubyte-0.10.4\src\arithmetic.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\ubyte-0.10.4\src\byte_unit.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\ubyte-0.10.4\src\parse.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\ubyte-0.10.4\src\ser_de.rs
+
+C:\Users\РЕГИНА\Desktop\studia\RUST\hello-rust\target\debug\deps\libubyte-20fd8d7c05489b0e.rlib: C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\ubyte-0.10.4\src\lib.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\ubyte-0.10.4\src\arithmetic.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\ubyte-0.10.4\src\byte_unit.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\ubyte-0.10.4\src\parse.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\ubyte-0.10.4\src\ser_de.rs
+
+C:\Users\РЕГИНА\Desktop\studia\RUST\hello-rust\target\debug\deps\ubyte-20fd8d7c05489b0e.d: C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\ubyte-0.10.4\src\lib.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\ubyte-0.10.4\src\arithmetic.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\ubyte-0.10.4\src\byte_unit.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\ubyte-0.10.4\src\parse.rs C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\ubyte-0.10.4\src\ser_de.rs
+
+C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\ubyte-0.10.4\src\lib.rs:
+C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\ubyte-0.10.4\src\arithmetic.rs:
+C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\ubyte-0.10.4\src\byte_unit.rs:
+C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\ubyte-0.10.4\src\parse.rs:
+C:\Users\РЕГИНА\.cargo\registry\src\index.crates.io-6f17d22bba15001f\ubyte-0.10.4\src\ser_de.rs:

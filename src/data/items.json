@@ -1,0 +1,63 @@
+[
+    {
+        "id": 1,
+        "id_capsule": 1,
+        "type_c": "photo",
+        "time_added": "2024-04-01T12:00:00Z",
+        "description": "Photo from New Year's Eve",
+        "size": "2MB",
+        "path": "path/to/photo1.jpg",
+        "metadata": {
+            "resolution": "1920x1080"
+        }
+    },
+    {
+        "id": 2,
+        "id_capsule": 1,
+        "type_c": "video",
+        "time_added": "2024-04-01T12:30:00Z",
+        "description": "New Year Countdown Celebration",
+        "size": "45MB",
+        "path": "path/to/video1.mp4",
+        "metadata": {
+            "duration": "120 seconds",
+            "resolution": "1920x1080"
+        }
+    },
+    {
+        "id": 3,
+        "id_capsule": 3,
+        "type_c": "letter",
+        "time_added": "2024-04-02T08:00:00Z",
+        "description": "Letter to my future self",
+        "size": "1KB",
+        "path": "path/to/letter1.txt",
+        "metadata": {
+            "word_count": 350
+        }
+    },
+    {
+        "id": 4,
+        "id_capsule": 5,
+        "type_c": "audio",
+        "time_added": "2024-04-02T09:00:00Z",
+        "description": "Recording of a live concert",
+        "size": "9MB",
+        "path": "path/to/audio1.mp3",
+        "metadata": {
+            "duration": "360 seconds"
+        }
+    },
+    {
+        "id": 5,
+        "id_capsule": 2,
+        "type_c": "photo",
+        "time_added": "2024-04-03T10:30:00Z",
+        "description": "Wildlife in the backyard",
+        "size": "3MB",
+        "path": "path/to/photo2.jpg",
+        "metadata": {
+            "resolution": "3840x2160"
+        }
+    }
+]

@@ -1,0 +1,58 @@
+[
+  {
+      "id": 1,
+      "name": "Personal Diary 2023",
+      "description": "Daily thoughts and notes throughout the year.",
+      "time_created": "2023-01-01T00:00:00Z",
+      "time_changed": "2023-01-02T00:00:00Z",
+      "time_open": "2025-01-01T00:00:00Z",
+      "time_until_changed": "2023-01-08T00:00:00Z",
+      "contributor_id": 1,
+      "item_ids": [1, 2]
+  },
+  {
+      "id": 2,
+      "name": "Project Launch Details",
+      "description": "Details and plans for the upcoming project launch.",
+      "time_created": "2023-02-01T12:00:00Z",
+      "time_changed": "2023-02-02T12:30:00Z",
+      "time_open": "2023-12-01T12:00:00Z",
+      "time_until_changed": "2023-02-08T12:30:00Z",
+      "contributor_id": 1,
+      "item_ids": [5]
+  },
+  {
+      "id": 3,
+      "name": "Cooking Recipes 2023",
+      "description": "Collection of favorite cooking recipes shared within the family.",
+      "time_created": "2023-03-05T16:30:00Z",
+      "time_changed": "2023-03-06T16:30:00Z",
+      "time_open": "2029-10-05T16:30:00Z",
+      "time_until_changed": "2023-03-12T16:30:00Z",
+      "contributor_id": 2,
+      "item_ids": [3]
+  },
+  {
+      "id": 4,
+      "name": "Yearly Financial Review 2023",
+      "description": "Analysis and breakdown of the financial year 2023.",
+      "time_created": "2023-04-12T11:45:00Z",
+      "time_changed": "2023-04-13T11:45:00Z",
+      "time_open": "2044-04-12T11:45:00Z",
+      "time_until_changed": "2023-04-19T11:45:00Z",
+      "contributor_id": 2,
+      "item_ids": []
+  },
+  {
+      "id": 5,
+      "name": "Fitness Goals and Progress",
+      "description": "Record of fitness activities and progress throughout the year.",
+      "time_created": "2023-05-18T14:20:00Z",
+      "time_changed": "2023-05-19T14:20:00Z",
+      "time_open": "2035-05-18T14:20:00Z",
+      "time_until_changed": "2023-05-25T14:20:00Z",
+      "contributor_id": 3,
+      "item_ids": [4]
+  }
+]
+
