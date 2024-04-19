@@ -42,6 +42,14 @@ pub struct ContributorUpdate {
 }
 
 
+#[derive(FromForm, UriDisplayQuery)]
+pub struct Pagination {
+    page: Option<usize>,
+    per_page: Option<usize>,
+}
+
+
+
 // This would typically be stored in a database
 pub static CONTRIBUTORS: Lazy<Mutex<Vec<Contributor>>> = Lazy::new(|| {
     Mutex::new(vec![])
@@ -70,10 +78,18 @@ pub fn create_contributor(contributor_data: Json<NewContributor>) -> Result<Json
 }
 
 
-#[get("/contributors")]
-pub fn list_contributors() -> Result<Json<Vec<Contributor>>, Status> {
+#[get("/contributors?<pagination..>")]
+pub fn list_contributors(pagination: Pagination) -> Result<Json<Vec<Contributor>>, Status> {
     let contributors = CONTRIBUTORS.lock().map_err(|_| Status::InternalServerError)?;
-    Ok(Json(contributors.clone()))
+
+    let per_page = pagination.per_page.unwrap_or(10); // Default to 10 items per page if not specified
+    let page = pagination.page.unwrap_or(1); // Default to page 1 if not specified
+    let start = (page - 1) * per_page;
+    let end = start + per_page;
+
+    let paged_contributors = contributors[start..end.min(contributors.len())].to_vec(); // Safely slice the vector to the page size, handling cases where the range may exceed the vector bounds
+
+    Ok(Json(paged_contributors))
 }
 
 #[get("/contributors/<contributor_id>")]

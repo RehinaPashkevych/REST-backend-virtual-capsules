@@ -14,7 +14,7 @@ use items::{get_all_items, get_item, get_capsule_items, add_item_to_capsule, get
     patch_capsule_item_description, delete_capsule_item};
 
 mod merges;
-use merges::{merge_capsules };
+use merges::{merge_capsules, list_merges };
 
 #[launch]
 fn rocket() -> _ {
@@ -37,6 +37,6 @@ fn rocket() -> _ {
             create_contributor, list_contributors, get_contributor_with_capsules, delete_contributor, update_contributor,
             get_all_items, get_item, get_capsule_items, add_item_to_capsule, get_capsule_item,
             patch_capsule_item_description, delete_capsule_item,
-            merge_capsules
+            merge_capsules, list_merges
         ])
 }

@@ -38,10 +38,18 @@ pub struct NewCapsule {
     time_open: DateTime<Utc>,
 }
 
+#[derive(FromForm, UriDisplayQuery)]
+pub struct Pagination {
+    page: Option<usize>,
+    per_page: Option<usize>,
+}
+
+
 // Global in-memory storage for capsules
 pub static CAPSULES: Lazy<Mutex<Vec<Capsule>>> = Lazy::new(|| {
     Mutex::new(vec![])
 });
+
 
 #[post("/capsules", format = "json", data = "<capsule_data>")]
 pub fn create_capsule(capsule_data: Json<NewCapsule>) -> Result<Json<Capsule>, status::Custom<Json<String>>> {
@@ -84,10 +92,18 @@ pub fn create_capsule(capsule_data: Json<NewCapsule>) -> Result<Json<Capsule>, s
 
 
 
-#[get("/capsules")]
-pub fn list_capsules() -> Result<Json<Vec<Capsule>>, Status> {
+#[get("/capsules?<pagination..>")]
+pub fn list_capsules(pagination: Pagination) -> Result<Json<Vec<Capsule>>, Status> {
     let capsules = CAPSULES.lock().map_err(|_| Status::InternalServerError)?;
-    Ok(Json(capsules.clone()))
+
+    let per_page = pagination.per_page.unwrap_or(10); // Default to 10 items per page if not specified
+    let page = pagination.page.unwrap_or(1); // Default to page 1 if not specified
+    let start = (page - 1) * per_page;
+    let end = start + per_page;
+
+    let paged_capsules = capsules[start..end.min(capsules.len())].to_vec(); // Safely slice the vector to the page size, handling cases where the range may exceed the vector bounds
+
+    Ok(Json(paged_capsules))
 }
 
 #[get("/capsules/<cid>")]

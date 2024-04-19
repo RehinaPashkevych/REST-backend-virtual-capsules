@@ -5,7 +5,7 @@ use once_cell::sync::Lazy;
 use rocket::response::status;
 use rocket::http::{Status};
 
-use crate::capsules::CAPSULES;
+use crate::capsules::{Capsule, CAPSULES};
 
 #[derive(Serialize, Deserialize, Clone)]
 #[serde(crate = "rocket::serde")]
@@ -36,6 +36,14 @@ pub struct NewItemUpdate {
     pub description: String,
 }
 
+
+#[derive(FromForm, UriDisplayQuery)]
+pub struct Pagination {
+    page: Option<usize>,
+    per_page: Option<usize>,
+}
+
+
 // Global in-memory storage for items
 pub static ITEMS: Lazy<Mutex<Vec<Item>>> = Lazy::new(|| {
     Mutex::new(vec![])
@@ -43,11 +51,20 @@ pub static ITEMS: Lazy<Mutex<Vec<Item>>> = Lazy::new(|| {
 
 
 
-#[get("/items")]
-pub fn get_all_items() -> Result<Json<Vec<Item>>, Status> {
+#[get("/items?<pagination..>")]
+pub fn get_all_items(pagination: Pagination) -> Result<Json<Vec<Item>>, Status> {
     let items = ITEMS.lock().map_err(|_| Status::InternalServerError)?;
-    Ok(Json(items.clone()))
+    
+    let per_page = pagination.per_page.unwrap_or(10); // Default to 10 items per page if not specified
+    let page = pagination.page.unwrap_or(1); // Default to page 1 if not specified
+    let start = (page - 1) * per_page;
+    let end = start + per_page;
+
+    let paged_items = items[start..end.min(items.len())].to_vec(); // Safely slice the vector to the page size, handling cases where the range may exceed the vector bounds
+
+    Ok(Json(paged_items))
 }
+
 
 #[get("/items/<item_id>")]
 pub fn get_item(item_id: u32) -> Result<Json<Item>, status::Custom<Json<String>>> {
@@ -90,6 +107,18 @@ pub fn add_item_to_capsule(cid: u32, item_data: Json<NewItem>) -> Result<Json<It
     let mut items = ITEMS.lock().unwrap();
     let mut capsules = CAPSULES.lock().unwrap();
 
+    // Find the corresponding capsule
+    let capsule = capsules.iter_mut().find(|cap| cap.id == cid);
+    if capsule.is_none() {
+        return Err(status::Custom(Status::NotFound, Json(format!("Capsule with ID {} not found", cid))));
+    }
+    let capsule = capsule.unwrap();
+
+    // Check if the capsule can still be changed
+    if Utc::now() > capsule.time_until_changed {
+        return Err(status::Custom(Status::BadRequest, Json("The modification period for this capsule has expired".into())));
+    }
+
     // Generate a new ID for the item
     let new_id = items.iter().max_by_key(|item| item.id).map_or(1, |max_item| max_item.id + 1);
 
@@ -108,19 +137,17 @@ pub fn add_item_to_capsule(cid: u32, item_data: Json<NewItem>) -> Result<Json<It
     // Add the new item to the ITEMS list
     items.push(new_item.clone());
 
-    // Update the corresponding capsule's item_ids list
-    if let Some(capsule) = capsules.iter_mut().find(|cap| cap.id == cid) {
-        if let Some(ref mut item_ids) = capsule.item_ids {
-            item_ids.push(new_id);
-        } else {
-            capsule.item_ids = Some(vec![new_id]);
-        }
+    // Update the capsule's item_ids and time_changed
+    if let Some(ref mut item_ids) = capsule.item_ids {
+        item_ids.push(new_id);
     } else {
-        return Err(status::Custom(Status::NotFound, Json(format!("Capsule with ID {} not found", cid))));
+        capsule.item_ids = Some(vec![new_id]);
     }
+    capsule.time_changed = Some(Utc::now());  // Update the time_changed to now after adding the item
 
     Ok(Json(new_item))
 }
+
 
 #[get("/capsules/<capsule_id>/items/<item_id>")]
 pub fn get_capsule_item(capsule_id: u32, item_id: u32) -> Result<Json<Item>, status::Custom<Json<String>>> {
@@ -141,13 +168,18 @@ pub fn get_capsule_item(capsule_id: u32, item_id: u32) -> Result<Json<Item>, sta
 #[patch("/capsules/<capsule_id>/items/<item_id>", format = "json", data = "<item_update>")]
 pub fn patch_capsule_item_description(capsule_id: u32, item_id: u32, item_update: Json<NewItemUpdate>) -> Result<Json<Item>, status::Custom<Json<String>>> {
     let mut items = ITEMS.lock().unwrap();
-    let capsules = CAPSULES.lock().unwrap();
+    let mut capsules = CAPSULES.lock().unwrap();
 
-    // First, verify the capsule contains the item
-    if let Some(capsule) = capsules.iter().find(|&c| c.id == capsule_id && c.item_ids.as_ref().map_or(false, |ids| ids.contains(&item_id))) {
+    // First, verify the capsule contains the item and can still be changed
+    if let Some(capsule) = capsules.iter_mut().find(|c| c.id == capsule_id && c.item_ids.as_ref().map_or(false, |ids| ids.contains(&item_id))) {
+        if Utc::now() > capsule.time_until_changed {
+            return Err(status::Custom(Status::BadRequest, Json("The modification period for this capsule has expired".into())));
+        }
+
         // Find the item and update the description
         if let Some(item) = items.iter_mut().find(|item| item.id == item_id) {
             item.description = item_update.description.clone();
+            capsule.time_changed = Some(Utc::now());  // Update the time_changed to now
             return Ok(Json(item.clone()));
         }
     }
@@ -160,18 +192,21 @@ pub fn delete_capsule_item(capsule_id: u32, item_id: u32) -> Result<Status, stat
     let mut items = ITEMS.lock().unwrap();
     let mut capsules = CAPSULES.lock().unwrap();
 
-    // Verify the item is in the specified capsule
+    // Verify the capsule can still be changed and contains the specified item
     if let Some(capsule) = capsules.iter_mut().find(|cap| cap.id == capsule_id) {
+        if Utc::now() > capsule.time_until_changed {
+            return Err(status::Custom(Status::BadRequest, Json("The modification period for this capsule has expired".into())));
+        }
+
         if let Some(pos) = capsule.item_ids.as_mut().unwrap().iter().position(|&id| id == item_id) {
             // Remove the item ID from the capsule's item_ids list
             capsule.item_ids.as_mut().unwrap().remove(pos);
-
             // Remove the item from the ITEMS list
             items.retain(|item| item.id != item_id);
+            capsule.time_changed = Some(Utc::now());  // Update the time_changed to now
 
             return Ok(Status::NoContent);
         }
     }
     Err(status::Custom(Status::NotFound, Json(format!("Item with ID {} not found in capsule {}", item_id, capsule_id))))
 }
-
