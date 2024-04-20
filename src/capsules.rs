@@ -4,6 +4,9 @@ use rocket::response::status;
 use chrono::{DateTime, Utc};
 use std::sync::Mutex;
 use once_cell::sync::Lazy;
+use sha2::{Sha256, Digest};
+use rocket::response::status::Custom;
+use std::collections::HashMap;
 
 use crate::contributors::CONTRIBUTORS;
 use crate::items::ITEMS;
@@ -20,6 +23,7 @@ pub struct Capsule {
     pub time_open: DateTime<Utc>,
     pub time_until_changed: DateTime<Utc>, // Time until the capsule can be changed
     pub item_ids: Option<Vec<u32>>, 
+    pub idempotency_key: String,
 }
 
 #[derive(Deserialize)]
@@ -29,7 +33,7 @@ pub struct CapsulePatch {
     description: Option<String>,
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Serialize, Deserialize, Clone)]
 #[serde(crate = "rocket::serde")]
 pub struct NewCapsule {
     name: String,
@@ -50,6 +54,18 @@ pub static CAPSULES: Lazy<Mutex<Vec<Capsule>>> = Lazy::new(|| {
     Mutex::new(vec![])
 });
 
+static IDEMPOTENCY_RECORDS: Lazy<Mutex<HashMap<String, String>>> = Lazy::new(|| Mutex::new(HashMap::new()));
+
+
+fn generate_idempotency_key(item: &NewCapsule) -> String {
+    let mut hasher = Sha256::new();
+    hasher.update(&item.name);
+    hasher.update(&item.description);
+    hasher.update(item.contributor_id.to_string());
+    hasher.update(item.time_open.to_rfc3339());  // Convert DateTime to string
+
+    format!("{:x}", hasher.finalize())
+}
 
 #[post("/capsules", format = "json", data = "<capsule_data>")]
 pub fn create_capsule(capsule_data: Json<NewCapsule>) -> Result<Json<Capsule>, status::Custom<Json<String>>> {
@@ -58,21 +74,36 @@ pub fn create_capsule(capsule_data: Json<NewCapsule>) -> Result<Json<Capsule>, s
 
     let new_capsule = capsule_data.into_inner();
 
+    let mut idempotency_records = IDEMPOTENCY_RECORDS.lock().unwrap();
+
+    // Generate the idempotency key
+    let idempotency_key = generate_idempotency_key(&new_capsule);
+
+    // Check for existing idempotency key to avoid processing the same request multiple times
+    if idempotency_records.contains_key(&idempotency_key) {
+        return Err(status::Custom(Status::BadRequest, Json("Duplicate submission detected".into())));
+    }
+
     if contributors.iter().any(|c| c.id == new_capsule.contributor_id) {
-        let id = capsules.len() as u32 + 1;
+        let id = capsules.iter().max_by_key(|c| c.id).map_or(1, |max| max.id + 1); // Ensure unique ID
+
         let capsule = Capsule {
             id,
-            name: new_capsule.name,
-            description: new_capsule.description,
+            name: new_capsule.name.clone(),  // Clone to avoid move
+            description: new_capsule.description.clone(),  // Clone to avoid move
             time_created: Utc::now(),
             time_changed: None,
             time_open: new_capsule.time_open,
             time_until_changed: Utc::now() + chrono::Duration::weeks(1),
             contributor_id: new_capsule.contributor_id,
-            item_ids: None
+            item_ids: None,
+            idempotency_key: idempotency_key.clone(),
         };
 
         capsules.push(capsule.clone());
+
+        // Record the successful operation to handle future idempotency
+        idempotency_records.insert(idempotency_key, serde_json::to_string(&capsule).unwrap());
 
         // Update the contributor's list of capsule IDs
         if let Some(contributor) = contributors.iter_mut().find(|c| c.id == new_capsule.contributor_id) {

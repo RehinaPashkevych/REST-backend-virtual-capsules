@@ -692,12 +692,14 @@ name = "hello-rust"
 version = "0.1.0"
 dependencies = [
  "chrono",
+ "digest",
  "once_cell 0.2.4",
  "rocket",
  "rocket_dyn_templates",
  "rocket_sync_db_pools",
  "serde",
  "serde_json",
+ "sha2",
 ]
 
 [[package]]

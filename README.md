@@ -32,10 +32,31 @@ This project serves as the backend component of a prototype system designed to m
 | `/capsules/<cid>/items/<iid>`   | `DELETE` | Removes an item from a capsule                   | None                 | `Status`             |
 | `/contributors`                 | `GET`    | Retrieves all contributors                       | None                 | `List of Contributors` |
 | `/contributors`                 | `POST`   | Adds a new contributor                           | `Contributor Data`   | `Contributor`        |
+| `/contributors`                 | `PATCH`  | Updates a contributor`s name and email           | `Contributor Data`   | `Contributor`        |
 | `/contributors/<cid>`           | `GET`    | Retrieves a specific contributor by ID           | None                 | `Contributor`        |
 | `/contributors/<cid>`           | `DELETE` | Deletes a specific contributor                   | None                 | `Status`             |
 | `/merges/<cid1>/<cid2>`         | `POST`   | Merges two capsules into one                     | None                 | `Capsule`            |
+| `/merges `                      | `GET`    |Retrieves all merges                              | None                 | `Capsule`            |
 | `/items`                        | `GET`    | Retrieves all items with optional pagination     | `Pagination Params`  | `List of Items`      |
+
+There are query parameters for `/capsules`,  `/contributors`,  `/items` endpoints for GET method. The usage is:
+
+```
+http://127.0.0.1:8000/contributors?page=2&per_page=1
+```
+
+### POST Exactly-Once Implementation
+
+In this project, exactly-once semantics are implemented to ensure that POST requests are idempotent. This means that multiple submissions of the same request will result in only one unique processing action, preventing duplicate data entries in the system. The mechanism is based on generating a unique idempotency key for each request, which is checked against a record of previously processed requests.
+
+#### Implemented Routes
+
+*   **POST `/capsules`**: This route generates a unique idempotency key based on the capsule's properties (name, description, contributor ID, and time open). If a request with the same key is received, the server will reject it with an error, indicating that the request has been detected as a duplicate.
+*   **POST `/capsules/<cid>/items`**: Similar to capsule creation, this route generates an idempotency key for each item added to a capsule based on the item's properties (type, description, size, path, and metadata). This key helps prevent the addition of duplicate items to a capsule if the same request is sent multiple times.
+
+#### Exception - POST for Contributors
+
+*   **POST `/contributors`** does not implement the exactly-once mechanism via idempotency keys because it inherently checks for the uniqueness of the email address associated with each contributor. If a request attempts to add a contributor with an existing email, the system will reject the request based on the unique constraint of the email field, thus ensuring idempotency by design.
 
 ## Data Formats
 

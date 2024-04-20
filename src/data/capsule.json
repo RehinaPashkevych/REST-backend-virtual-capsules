@@ -8,7 +8,8 @@
       "time_open": "2025-01-01T00:00:00Z",
       "time_until_changed": "2023-01-08T00:00:00Z",
       "contributor_id": 1,
-      "item_ids": [1, 2]
+      "item_ids": [1, 2],
+      "idempotency_key": "e0a31262c195891a764c79b583aa2e1ff57dd450e4f28ef44a74178c3136f998"
   },
   {
       "id": 2,
@@ -19,7 +20,8 @@
       "time_open": "2023-12-01T12:00:00Z",
       "time_until_changed": "2023-02-08T12:30:00Z",
       "contributor_id": 1,
-      "item_ids": [5]
+      "item_ids": [5],
+      "idempotency_key": "153c363738241ad29288eec9e2de13e6a26ca55dcabfad9e0668b249a0580966"
   },
   {
       "id": 3,
@@ -30,7 +32,8 @@
       "time_open": "2029-10-05T16:30:00Z",
       "time_until_changed": "2023-03-12T16:30:00Z",
       "contributor_id": 2,
-      "item_ids": [3]
+      "item_ids": [3],
+      "idempotency_key": "38c74d8ae318df887bf13c37ab935dffbaf7f0ee88baa67068ebba7555cab6c2"
   },
   {
       "id": 4,
@@ -41,7 +44,8 @@
       "time_open": "2044-04-12T11:45:00Z",
       "time_until_changed": "2023-04-19T11:45:00Z",
       "contributor_id": 2,
-      "item_ids": []
+      "item_ids": [],
+      "idempotency_key": "d758e7c64d516d3d90e0783f9938e2f9185381bf547cf2c59cd7bf8cc9bf7157"
   },
   {
       "id": 5,
@@ -52,7 +56,8 @@
       "time_open": "2035-05-18T14:20:00Z",
       "time_until_changed": "2023-05-25T14:20:00Z",
       "contributor_id": 3,
-      "item_ids": [4]
+      "item_ids": [4],
+      "idempotency_key": "6aa45efba676d2e6abb8b78d986bc11e8ec68f8b56bba9cbbe525d42a006afd4"
   }
 ]
 
