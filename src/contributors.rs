@@ -1,8 +1,10 @@
 use rocket::serde::{json::Json, Deserialize, Serialize};
-use rocket::http::Status;
+use rocket::http::{Status, Header};
 use rocket::response::status;
 use std::sync::Mutex;
 use once_cell::sync::Lazy;
+use rocket::response::{self, Responder, Response, Redirect};
+use rocket::Request;
 
 // Assume these are in a module named `capsules`
 use crate::capsules::{Capsule, CAPSULES};
@@ -55,6 +57,25 @@ pub static CONTRIBUTORS: Lazy<Mutex<Vec<Contributor>>> = Lazy::new(|| {
     Mutex::new(vec![])
 });
 
+// Custom responder to add headers
+pub struct CustomResponder<T> {
+    inner: T,
+    total_items: usize,
+    page: usize,
+    per_page: usize,
+}
+
+impl<'r, T: Responder<'r, 'static>> Responder<'r, 'static> for CustomResponder<T> {
+    fn respond_to(self, request: &'r Request<'_>) -> response::Result<'static> {
+        let mut build = Response::build_from(self.inner.respond_to(request)?);
+        build.raw_header("X-Total-Count", self.total_items.to_string());
+        build.raw_header("X-Page", self.page.to_string());
+        build.raw_header("X-Per-Page", self.per_page.to_string());
+        build.ok()
+    }
+}
+
+
 
 #[post("/contributors", format = "json", data = "<contributor_data>")]
 pub fn create_contributor(contributor_data: Json<NewContributor>) -> Result<Json<Contributor>, status::Custom<Json<String>>> {
@@ -79,7 +100,7 @@ pub fn create_contributor(contributor_data: Json<NewContributor>) -> Result<Json
 
 
 #[get("/contributors?<pagination..>")]
-pub fn list_contributors(pagination: Pagination) -> Result<Json<Vec<Contributor>>, Status> {
+pub fn list_contributors(pagination: Pagination) -> Result<CustomResponder<Json<Vec<Contributor>>>, Status> {
     let contributors = CONTRIBUTORS.lock().map_err(|_| Status::InternalServerError)?;
 
     let per_page = pagination.per_page.unwrap_or(10); // Default to 10 items per page if not specified
@@ -89,7 +110,12 @@ pub fn list_contributors(pagination: Pagination) -> Result<Json<Vec<Contributor>
 
     let paged_contributors = contributors[start..end.min(contributors.len())].to_vec(); // Safely slice the vector to the page size, handling cases where the range may exceed the vector bounds
 
-    Ok(Json(paged_contributors))
+    Ok(CustomResponder {
+        inner: Json(paged_contributors),
+        total_items: contributors.len(),
+        page,
+        per_page,
+    })
 }
 
 #[get("/contributors/<contributor_id>")]

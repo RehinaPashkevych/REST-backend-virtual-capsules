@@ -3,7 +3,7 @@ use std::fs;
 use serde_json; // Ensure serde_json is added to your dependencies
 
 mod capsules;
-use capsules::{create_capsule, list_capsules, capsule_detail, update_capsule, patch_capsule, delete_capsule};
+use capsules::{create_and_update_capsule, list_capsules, capsule_detail, update_capsule, patch_capsule, delete_capsule};
 
 mod contributors;
 use contributors::{create_contributor, list_contributors, get_contributor_with_capsules, delete_contributor,
@@ -14,7 +14,7 @@ use items::{get_all_items, get_item, get_capsule_items, add_item_to_capsule, get
     patch_capsule_item_description, delete_capsule_item};
 
 mod merges;
-use merges::{merge_capsules, list_merges };
+use merges::{merge_capsules, get_merge_records };
 
 #[launch]
 fn rocket() -> _ {
@@ -33,10 +33,10 @@ fn rocket() -> _ {
 
     rocket::build()
         .mount("/", routes![
-            create_capsule, list_capsules, capsule_detail, update_capsule, patch_capsule, delete_capsule,
+            create_and_update_capsule, list_capsules, capsule_detail, update_capsule, patch_capsule, delete_capsule,
             create_contributor, list_contributors, get_contributor_with_capsules, delete_contributor, update_contributor,
             get_all_items, get_item, get_capsule_items, add_item_to_capsule, get_capsule_item,
             patch_capsule_item_description, delete_capsule_item,
-            merge_capsules, list_merges
+            merge_capsules, get_merge_records
         ])
 }

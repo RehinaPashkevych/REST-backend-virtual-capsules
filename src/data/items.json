@@ -10,7 +10,7 @@
         "metadata": {
             "resolution": "1920x1080"
         },
-        "idempotency_key": "c18048203065dfe1233cfae273ec1deaa8232257fefe4b5d78e4689f7e338e82"
+        "version": 1
     },
     {
         "id": 2,
@@ -24,7 +24,7 @@
             "duration": "120 seconds",
             "resolution": "1920x1080"
         },
-        "idempotency_key": "ff2780f10844aafd2d22e79275c38ac1af120f805e9d3a33bb1a8d34d7d49794"
+        "version": 2
     },
     {
         "id": 3,
@@ -37,7 +37,7 @@
         "metadata": {
             "word_count": 350
         },
-        "idempotency_key": "79364333c03c5732ceee1235e1024b3d882d6a49fbc2f54c7af1375999822a87"
+        "version": 1
     },
     {
         "id": 4,
@@ -50,7 +50,7 @@
         "metadata": {
             "duration": "360 seconds"
         },
-        "idempotency_key": "f950ac9eb4af4ef5daa34dfefbadb2a8fd4ee5051ba6b0fa2fa68bb0d90e0199"
+        "version": 2
     },
     {
         "id": 5,
@@ -63,6 +63,6 @@
         "metadata": {
             "resolution": "3840x2160"
         },
-        "idempotency_key": "14ecaa0654c9b55acacba0c92337873948c2920ef2e9f75c659b500c50053827"
+        "version": 3
     }
 ]
